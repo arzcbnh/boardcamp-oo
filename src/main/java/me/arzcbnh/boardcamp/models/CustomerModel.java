@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
+import me.arzcbnh.boardcamp.dtos.CustomerDTO;
 
 @Data
 @Entity
@@ -22,6 +23,12 @@ public class CustomerModel {
     @Column(nullable = false)
     private String phone;
 
-    @Column(nullable = false, length = 11, unique = true)
+    @Column(nullable = false, unique = true)
     private String cpf;
+
+    public CustomerModel(CustomerDTO dto) {
+        name = dto.getName();
+        phone = dto.getPhone();
+        cpf = dto.getCpf();
+    }
 }

@@ -1,6 +1,6 @@
 package me.arzcbnh.boardcamp.models;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,6 +11,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
+import me.arzcbnh.boardcamp.dtos.RentalDTO;
 
 @Data
 @Entity
@@ -21,10 +22,10 @@ public class RentalModel {
     private Long id;
 
     @Column(nullable = false)
-    private Date rentDate;
+    private LocalDate rentDate;
 
     @Column
-    private Date returnDate;
+    private LocalDate returnDate;
 
     @Column(nullable = false)
     private Integer daysRented;
@@ -42,4 +43,13 @@ public class RentalModel {
     @ManyToOne
     @JoinColumn(name = "customerId")
     private CustomerModel customer;
+
+    public RentalModel(RentalDTO dto, GameModel gm, CustomerModel cm) {
+        game = gm;
+        customer = cm;
+        delayFee = 0;
+        rentDate = LocalDate.now();
+        daysRented = dto.getDaysRented();
+        originalPrice = daysRented * gm.getPricePerDay();
+    }
 }

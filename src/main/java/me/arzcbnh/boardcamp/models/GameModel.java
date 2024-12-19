@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
+import me.arzcbnh.boardcamp.dtos.GameDTO;
 
 @Data
 @Entity
@@ -16,7 +17,7 @@ public class GameModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
 
     @Column(nullable = false)
@@ -27,4 +28,11 @@ public class GameModel {
 
     @Column(nullable = false)
     private Integer pricePerDay;
+
+    public GameModel(GameDTO dto) {
+        name = dto.getName();
+        image = dto.getImage();
+        stockTotal = dto.getStockTotal();
+        pricePerDay = dto.getPricePerDay();
+    }
 }
