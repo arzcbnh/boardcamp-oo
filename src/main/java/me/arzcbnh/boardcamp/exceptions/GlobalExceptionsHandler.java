@@ -16,4 +16,9 @@ public class GlobalExceptionsHandler {
     public ResponseEntity<String> handleUnprocessableEntity(UnprocessableEntityException exception) {
         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(exception.getMessage());
     }
+
+    @ExceptionHandler({ RentalNotReturnedException.class })
+    public ResponseEntity<String> handleRentalNotReturned(RentalNotReturnedException exception) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
+    }
 }
