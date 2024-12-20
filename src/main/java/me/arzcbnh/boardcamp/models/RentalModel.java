@@ -11,14 +11,18 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import me.arzcbnh.boardcamp.dtos.RentalDTO;
 
 @Data
+@NoArgsConstructor
 @Entity
 @Table(name = "rentals")
 public class RentalModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @EqualsAndHashCode.Exclude
     private Long id;
 
     @Column(nullable = false)

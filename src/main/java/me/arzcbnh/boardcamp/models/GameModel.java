@@ -7,14 +7,18 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import me.arzcbnh.boardcamp.dtos.GameDTO;
 
 @Data
+@NoArgsConstructor
 @Entity
 @Table(name = "games")
 public class GameModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @EqualsAndHashCode.Exclude
     private Long id;
 
     @Column(nullable = false, unique = true)
