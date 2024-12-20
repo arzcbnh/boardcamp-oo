@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 import me.arzcbnh.boardcamp.models.CustomerModel;
 
 @Repository
-public interface CustomerRepository extends JpaRepository<CustomerModel, Long> {}
+public interface CustomerRepository extends JpaRepository<CustomerModel, Long> {
+    boolean existsByCpf(String cpf);
+}

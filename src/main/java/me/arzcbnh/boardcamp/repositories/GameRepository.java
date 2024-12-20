@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 import me.arzcbnh.boardcamp.models.GameModel;
 
 @Repository
-public interface GameRepository extends JpaRepository<GameModel, Long> {}
+public interface GameRepository extends JpaRepository<GameModel, Long> {
+    boolean existsByName(String name);
+}
