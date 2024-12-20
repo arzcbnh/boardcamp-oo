@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 import me.arzcbnh.boardcamp.dtos.GameDTO;
+import me.arzcbnh.boardcamp.exceptions.ConflictException;
 import me.arzcbnh.boardcamp.models.GameModel;
 import me.arzcbnh.boardcamp.services.GameService;
 
@@ -31,7 +32,7 @@ public class GameController {
     }
 
     @PostMapping
-    public ResponseEntity<GameModel> postGame(@RequestBody @Valid GameDTO body) {
+    public ResponseEntity<GameModel> postGame(@RequestBody @Valid GameDTO body) throws ConflictException {
         GameModel game = gameService.postGame(body);
         return ResponseEntity.status(HttpStatus.CREATED).body(game);
     }

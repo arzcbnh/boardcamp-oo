@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 import me.arzcbnh.boardcamp.dtos.CustomerDTO;
+import me.arzcbnh.boardcamp.exceptions.ConflictException;
 import me.arzcbnh.boardcamp.exceptions.NotFoundException;
 import me.arzcbnh.boardcamp.models.CustomerModel;
 import me.arzcbnh.boardcamp.services.CustomerService;
@@ -39,7 +40,7 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<CustomerModel> postCustomer(@RequestBody @Valid CustomerDTO body) {
+    public ResponseEntity<CustomerModel> postCustomer(@RequestBody @Valid CustomerDTO body) throws ConflictException {
         CustomerModel customer = customerService.postCustomer(body);
         return ResponseEntity.status(HttpStatus.CREATED).body(customer);
     }
