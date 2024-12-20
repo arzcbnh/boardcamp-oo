@@ -12,7 +12,7 @@ import me.arzcbnh.boardcamp.models.RentalModel;
 public interface RentalRepository extends JpaRepository<RentalModel, Long> {
     @Query(
         nativeQuery = true,
-        value = "SELECT * FROM rentals WHERE returnDate IS NOT NULL;"
+        value = "SELECT * FROM rentals WHERE return_date IS NULL;"
     )
     List<RentalModel> findAllNotReturnedByGameId(Long gameId);
 }
