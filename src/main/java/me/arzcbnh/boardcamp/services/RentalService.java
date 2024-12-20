@@ -1,7 +1,7 @@
 package me.arzcbnh.boardcamp.services;
 
-import java.time.Duration;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -57,7 +57,7 @@ public class RentalService {
         }
     
         var returnDate = LocalDate.now();
-        var overdueDays = Duration.between(rental.getRentDate(), returnDate).toDays() - rental.getDaysRented();
+        var overdueDays = ChronoUnit.DAYS.between(rental.getRentDate(), returnDate) - rental.getDaysRented();
         var delayFee = (int) (overdueDays > 0 ? overdueDays * rental.getGame().getPricePerDay() : 0);
 
         rental.setReturnDate(returnDate);
