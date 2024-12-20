@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import me.arzcbnh.boardcamp.dtos.CustomerDTO;
+import me.arzcbnh.boardcamp.exceptions.CustomerAlreadyExists;
 import me.arzcbnh.boardcamp.exceptions.CustomerNotFoundException;
 import me.arzcbnh.boardcamp.exceptions.NotFoundException;
 import me.arzcbnh.boardcamp.models.CustomerModel;
@@ -31,7 +32,11 @@ public class CustomerService {
         return customer;
     }
 
-    public CustomerModel postCustomer(CustomerDTO dto) {
+    public CustomerModel postCustomer(CustomerDTO dto) throws CustomerAlreadyExists {
+        if (customerRepository.existsByCpf(dto.getCpf())) {
+            throw new CustomerAlreadyExists(dto.getCpf());
+        }
+
         var customer = new CustomerModel(dto);
         return customerRepository.save(customer);
     }

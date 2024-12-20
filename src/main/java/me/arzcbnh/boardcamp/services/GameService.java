@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import me.arzcbnh.boardcamp.dtos.GameDTO;
+import me.arzcbnh.boardcamp.exceptions.GameAlreadyExistsException;
 import me.arzcbnh.boardcamp.models.GameModel;
 import me.arzcbnh.boardcamp.repositories.GameRepository;
 
@@ -21,7 +22,11 @@ public class GameService {
         return games;
     }
 
-    public GameModel postGame(GameDTO dto) {
+    public GameModel postGame(GameDTO dto) throws GameAlreadyExistsException {
+        if (gameRepository.existsByName(dto.getName())) {
+            throw new GameAlreadyExistsException(dto.getName());
+        }
+
         var game = new GameModel(dto);
         return gameRepository.save(game);
     }
